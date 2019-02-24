@@ -1,7 +1,7 @@
 #include "Exercise.h"
 
 bool Exercise::read_file_string() {
-  std::ifstream file("Day5.txt");
+  std::ifstream file("Day5test.txt");
   std::string data{};
   if (!file.is_open()) {
     //std::cout << "File is not open\n";
@@ -17,19 +17,26 @@ bool Exercise::read_file_string() {
   return true;
 }// changing SOURCE FILE!!!!!!!!
 
-bool Exercise::split_the_string() {
+int Exercise::split_the_string() {
   read_file_string();
   if (!import_file.empty()){
     std::cout << "import_file size: " << import_file.size() << '\n';
 
     for (auto a : import_file){
       if (a){
-        std::cout << a << ',';
+        files.push_back(a);
       }
     }
-    return true;
+    return files.size();
   } else {
     return false;
   }
+}
+int Exercise::compare_chars() {
+  split_the_string();
+  for (auto a : files){
 
+    //todo I think switch would be good fit for this if not maybe regex???
+  }
+  return 0; // todo change that
 }

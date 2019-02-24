@@ -10,9 +10,11 @@
 class Exercise {
 private:
     std::string import_file{};
+    std::vector<char>files{};
 public:
-    bool read_file_string();
-    bool split_the_string();
+  bool read_file_string();
+  int split_the_string();
+  int compare_chars();
 
 };
 
