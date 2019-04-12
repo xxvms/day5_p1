@@ -4,8 +4,10 @@ bool Exercise::read_file_string() {
   std::ifstream file("Day5.txt");
   std::string data{};
   if (!file.is_open() || file.eof()) {
-    // std::cout << "File is not open\n";
-    return false;
+
+    std::cerr << "No file exist\n";
+    throw;
+
   } else {
     while (std::getline(file, data)) {
       import_file = data;
@@ -37,79 +39,72 @@ std::vector<char> Exercise::compare_chars() {
   split_the_string();
   std::vector<std::string> polymer_bank{};
 
+  auto begin_files = files.begin();
+  while (begin_files != files.end()) {
 
-  auto start = files.begin();
-  while (start != files.end()) {
+    if (result_bank.empty()) {
 
-          if (result_bank.empty()){
+      result_bank.emplace_back(*begin_files);
 
-            result_bank.emplace_back(*start);
+    } else {
 
-          } else {
+      auto &res_b = result_bank.at(result_bank.size() - 1);
 
-            auto& res_b = result_bank.at(result_bank.size()-1);
+      if ((res_b + 32) == *begin_files) {
 
-            if ( (res_b + 32) == *start) {
+        result_bank.pop_back();
+        *begin_files = 0;
 
-              result_bank.pop_back();
-              *start = 0;
+      } else if ((res_b - 32) == *begin_files) {
 
-            } else if ( (res_b - 32) == *start){
+        result_bank.pop_back();
+        *begin_files = 0;
 
-              result_bank.pop_back();
-              *start = 0;
+      } else {
 
-            } else {
-
-              result_bank.emplace_back(*start);
-
-            }
-          }
-
-    if (start != files.end()) {
-      std::advance(start, 1);    }
-
-  if (result_bank.size() == 10){
-
-    std::string tmp{};
-
-    for (auto a : result_bank){
-
-      tmp += a;
+        result_bank.emplace_back(*begin_files);
+      }
     }
 
-    polymer_bank.emplace_back(tmp);
+    if (begin_files != files.end()) {
+      std::advance(begin_files, 1);
+    }
 
-    tmp.clear();
-    result_bank.clear();
-  }
+    if (result_bank.size() == 10) {
+      std::string tmp{};
 
+      for (auto a : result_bank) {
+
+        tmp += a;
+      }
+
+      polymer_bank.emplace_back(tmp);
+
+      result_bank.clear();
+    }
   }
   std::cout << "POLYMER BANK: " << polymer_bank.size() << '\n';
 
-
-  return result_bank;
+  return result_bank; // I can remove this at least now I am not using this value.
 }
 
-int Exercise::make_polymer(){
+int Exercise::make_polymer() {
 
   std::string tmp{};
   std::vector<std::string> polymer_bank{};
   int counter = 0;
 
-  for (size_t i = 0; i < result_bank.size(); i++){
+  for (size_t i = 0; i < result_bank.size(); i++) {
 
     tmp += result_bank.at(i);
     counter++;
 
-    if (counter == 10){
+    if (counter == 10) {
       polymer_bank.emplace_back(tmp);
       counter = 0;
-      tmp.clear();
     }
   }
 
   std::cout << "size of the polymer: " << polymer_bank.size() << '\n';
   return polymer_bank.size();
-
 }
