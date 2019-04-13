@@ -1,7 +1,7 @@
 #include "Exercise.h"
 #include "catch.hpp"
 #include <fstream>
-/*
+
 TEST_CASE("Test reading from file", "Read File"){
 
   GIVEN("File that returns bool on read"){
@@ -22,13 +22,11 @@ TEST_CASE("Split the string function", "Check if we can print each char"){
   }
 
 }
-*/
 TEST_CASE("Compare 1st and 2nd char"){
   GIVEN("File is not empty"){
     Exercise blach;
     GIVEN("String is created then imported to a vector"){
-      WHEN("We compare two adjusted chars"){
-        blach.compare_chars();
+      WHEN("We compare two adjusted chars"){ blach.eliminate_pairs();
 
       }
     }

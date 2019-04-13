@@ -17,9 +17,7 @@ private:
 public:
   bool read_file_string();
   int split_the_string();
-  std::vector<char> compare_chars();
-  int make_polymer();
-
+  std::vector<char> eliminate_pairs();
 };
 
 
