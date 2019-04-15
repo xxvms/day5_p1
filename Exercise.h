@@ -12,12 +12,13 @@ class Exercise {
 private:
     std::string import_file{};
     std::vector<char>files{};
-    std::vector<char>result_bank{};
+    //std::vector<char>result_bank{};
 
 public:
-  bool read_file_string();
-  int split_the_string();
-  std::vector<char> eliminate_pairs();
+  std::string read_file_string();
+  std::vector<char> split_the_string(std::string input);
+  std::vector<char> eliminate_pairs(const std::vector<char>& input);
+  std::vector<int> clean_and_compare(const std::vector<char>& input);
 };
 
 
